@@ -57,7 +57,7 @@ public class Main {
 
                     //Pessoa titular = null;
 
-                    for (Pessoa c : clientes) {         //clientes é o ARRAY QUE AINDA CRIAREMOS
+                    for (Pessoa c : clientes) {       
                         if (c.equals(cpfDeAlguem)) {
                             titular = c;
                             break;
