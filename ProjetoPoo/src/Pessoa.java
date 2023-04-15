@@ -12,7 +12,4 @@ public class Pessoa {
         this.nome = nome;
         this.cpf = cpf;
     }
-
-    public void add(ArrayList<Pessoa> clientes) {
-    }
 }

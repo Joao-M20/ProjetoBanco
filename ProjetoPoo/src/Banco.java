@@ -23,7 +23,4 @@ public class Banco {
         saldo -= valor;
     }
 
-
-    public void add(ArrayList<Banco> contas) {
-    }
 }

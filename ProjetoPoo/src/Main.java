@@ -1,6 +1,11 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/*
+    Ivan João Quispe Mayta - RGM 29747511
+    Rafael -
+ */
+
 public class Main {
     public static void main(String[] args) {
 
@@ -20,7 +25,6 @@ public class Main {
 
             switch (escolha) {
                 case 1:
-                    //Pessoa cliente1 = new Pessoa();
 
                     //CRIAR CLIENTE
                     System.out.println("Insira o nome do cliente:");
@@ -30,43 +34,28 @@ public class Main {
                     System.out.println("Insira o CPF:");
                     String cpf = sc.next();
 
-                    Pessoa cliente2 = new Pessoa(nome, cpf);
-                    cliente2.add(clientes);
-
-
-                    //--------------------------------------------------------------------------------------------------------------------------
-
-//                Banco conta1 = new Banco();
-//
-//                conta1.cliente = cliente1;
-//
-//                //CONTA
-//                System.out.println("Insira o numero da conta:");
-//                int numConta1 = sc.nextInt();
-//                conta1.numeroConta = numConta1;
-
+                    Pessoa cliente1 = new Pessoa(nome, cpf);
+                    clientes.add(cliente1);
 
                     break;
                 case 2:
-                    Banco conta1 = new Banco();
 
                     //CADASTRANDO CONTA
                     System.out.println("Insira o numero da conta:");
                     int numConta1 = sc.nextInt();
-                    conta1.numeroConta = numConta1;
 
+                    //INSERINDO UM SALDO INICIAL
                     System.out.println("Insira o saldo inicial da conta:");
                     double saldo1 = sc.nextDouble();
-                    conta1.saldo = saldo1;
 
+                    //INFORMANDO O CPF DO CLIENTE, PARA VINCULAR AO BANCO
                     System.out.println("Informe o CPF do titular da conta:");
                     String cpfDeAlguem = sc.next();
 
-                    conta1.add(contas);
 
+                    Pessoa titular = null;
 
                     //Pessoa titular = null;
-                    Pessoa titular;
 
                     for (Pessoa c : clientes) {         //clientes é o ARRAY QUE AINDA CRIAREMOS
                         if (c.equals(cpfDeAlguem)) {
@@ -75,32 +64,79 @@ public class Main {
                         }
                     }
 
+                    Banco umaConta = new Banco(titular, numConta1,saldo1);
+                    contas.add(umaConta);
+
+
                     break;
                 case 3:
                     System.out.println("Informe o numero da conta: ");
                     int contaA1 = sc.nextInt();
 
 
-                    //BUSCAMOS A CONTA
+                    //BUSCANDO A CONTA
                     for (Banco d : contas) {
-                        if (d.equals(contaA1)) {
+                        if (d.numeroConta == contaA1) {
                             //ACHAMOS A CONTA
-                            System.out.println(d.saldo);
                             System.out.println("Conta confirmada");
+                            System.out.println("Seu saldo é " + d.saldo);
                         } else {
                             System.out.println("A conta informada não existe");
                         }
                     }
 
-
                     break;
                 case 4:
+
+                    System.out.println("Contas Cadastradas: ");
+                    for (Banco todasContas : contas){
+                        System.out.println(todasContas.numeroConta);
+                    }
                     break;
 
                 case 5:
                     System.out.println("Informe o numero da conta:");
                     int numDaConta = sc.nextInt();
 
+                    for (Banco b : contas) {
+                        if (b.numeroConta == numDaConta) {
+                            Banco conta = b;
+                            System.out.println("Insira o valor a ser sacado:");
+                            int valorRetirar = sc.nextInt();
+
+                            if (valorRetirar > conta.saldo) {
+                                System.out.println("Saldo insuficiente");
+                                break;
+                            } else {
+                                conta.sacar(valorRetirar);
+                                System.out.println("Saldo atual, apos o saque: " + conta.saldo);
+                            }
+                        }
+                    }
+
+                    break;
+
+                case 6:
+                    System.out.println("Digite o numero da conta");
+                    int numContaDeposito = sc.nextInt();
+
+
+                    for(Banco banco : contas) {
+                        if (banco.numeroConta == numContaDeposito){
+                            System.out.println("Informe o valor para depósito: ");
+                            int valorDeposito = sc.nextInt();
+
+                            banco.depositar(valorDeposito);
+                            System.out.println("Saldo da conta apos o deposito: " + banco.saldo);
+                        } else {
+                            System.out.println("A conta informada não existe");
+                        }
+                    }
+
+                    break;
+                case 7:
+                    System.out.println("Obrigado por utilizar nosso sistema");
+                    flag = false;
                     break;
 
 
